@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "instant-spatial-3d"
+version = "0.1.0"
+description = "IS3D single-image to metric 3D Gaussian scene generator"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "numpy>=1.26",
+  "pillow>=10.0",
+  "pyyaml>=6.0",
+  "typer>=0.12",
+  "rich>=13.7"
+]
+
+[project.optional-dependencies]
+ml = [
+  "torch>=2.2"
+]
+
+[project.scripts]
+is3d = "is3d.cli:app"
+
+[tool.setuptools]
+packages = ["is3d", "is3d.stages", "is3d.exporters", "is3d.math", "is3d.models"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

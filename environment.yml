@@ -1,0 +1,14 @@
+name: is3d
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pip
+  - numpy>=1.26
+  - pillow>=10.0
+  - pyyaml>=6.0
+  - typer>=0.12
+  - rich>=13.7
+  - pytest>=8.0
+  - pip:
+      - -e .

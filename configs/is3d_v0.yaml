@@ -1,0 +1,59 @@
+latency_budget_ms:
+  t1_preprocess: 100
+  t2_inference: 600
+  t3_resource_build: 300
+  t4_activation: 150
+
+pipeline:
+  sample_stride: 4
+  min_depth_m: 0.6
+  max_depth_m: 5.0
+  gaussian_scale_ratio: 0.015
+  completion_ratio: 0.22
+  completion_opacity_gain: 0.65
+  depth_smoothing: 0.35
+  navmesh_cell_size_m: 0.2
+  navmesh_height_tolerance_m: 0.25
+  navmesh_min_points_per_cell: 2
+
+hardware_tier:
+  default: tier2
+  tiers:
+    tier1:
+      name: flagship
+      zero_copy: true
+      triplane_enabled: true
+    tier2:
+      name: mid_range
+      zero_copy: false
+      triplane_enabled: true
+    tier3:
+      name: legacy
+      zero_copy: false
+      triplane_enabled: false
+
+model_runtime:
+  enabled: true
+  backend: torch
+  device: auto
+  dtype: float32
+  strict_load: false
+  allow_uninitialized: true
+  use_completion_decoder: true
+  seed: 42
+
+  encoder_embed_dim: 192
+  regressor_latent_dim: 128
+  decoder_model_dim: 128
+  decoder_heads: 8
+  decoder_layers: 2
+  max_input_edge: 1280
+  max_visible_points: 120000
+  max_completion_queries: 4096
+  max_completion_memory_tokens: 8192
+  disable_completion_on_mps: true
+
+  weights:
+    fastvit: null
+    triplane: null
+    completion: null
